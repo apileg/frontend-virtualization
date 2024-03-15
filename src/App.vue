@@ -1,7 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ProductsSearch from './components/ProductsSearch.vue'
+</script>
 
 <template>
-  <header></header>
-
-  <main></main>
+  <main>
+    <div class="d-flex-center items-center h-100">
+      <ProductsSearch />
+    </div>
+  </main>
 </template>
