@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Product } from '@/types/product'
+import type { Product } from '@/types/Product'
 
 defineProps<{
   product: Product
@@ -11,6 +11,10 @@ defineProps<{
     <img :src="product.thumbnail" :alt="product.title" class="card-image object-cover" />
 
     <div class="card-content d-flex flex-col w-100">
+      <!-- <h4>
+        <HighlightedString :value="product.title" />
+      </h4> -->
+
       <h4 class="font-weight-bold text-truncate">{{ product.title }}</h4>
       <p class="text-charcoal text-truncate">
         {{ product.description }}
@@ -21,14 +25,21 @@ defineProps<{
           Discount {{ product.discountPercentage }} %
         </p>
 
-        <p class="brand font-weight-bold text-aqua-blue">{{ product.brand }}</p>
+        <p class="brand font-weight-bold text-aqua-blue text-truncate">{{ product.brand }}</p>
 
         <div class="price-and-rating">
-          <p class="price font-weight-bold text-aqua-blue">{{ product.price }}</p>
-          <p class="rating font-weight-bold text-aqua-blue">{{ product.rating }}</p>
+          <h4 class="price font-weight-bold text-aqua-blue">$ {{ product.price }}</h4>
+          <div class="d-flex-center items-center">
+            <img src="/src/assets/icons/star.svg" class="star-icon" />
+            <h4 class="rating font-weight-bold text-aqua-blue">{{ product.rating }}</h4>
+          </div>
         </div>
 
-        <p class="category font-weight-bold text-aqua-blue">{{ product.category }}</p>
+        <div class="category d-flex-center items-center bg-phthalo-green card-border-radius">
+          <p class="text-spanish-green">
+            {{ product.category }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -39,9 +50,14 @@ defineProps<{
   gap: 15px;
 }
 
+.star-icon {
+  height: 15px;
+  margin-right: 4px;
+}
+
 .card-content {
   min-width: 0;
-  flex-grow: 0.8;
+  flex-grow: 1;
 
   gap: 8px;
 }
@@ -57,9 +73,8 @@ defineProps<{
   display: grid;
 
   column-gap: 2rem;
-  row-gap: 1rem;
 
-  grid-template-columns: min-content 1fr 0.5fr;
+  grid-template-columns: 1fr 1fr 0.5fr;
   grid-template-rows: 1fr 1fr;
 }
 
@@ -82,11 +97,17 @@ defineProps<{
   grid-column: 1;
 
   display: flex;
+  align-items: center;
+  gap: 8px;
   justify-content: space-between;
 }
 
 .category {
   grid-row: 2;
   grid-column: 2;
+
+  width: fit-content;
+  padding: 2px 8px;
 }
 </style>
+@/types/Product

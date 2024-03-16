@@ -1,23 +1,26 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import type { Product } from '@/types/Product'
 import ProductCard from './ProductCard.vue'
-import type { Product } from '@/types/product'
-import { getProducts } from '@/business-logic/getProducts'
 
-const products = ref<Product[] | null>(null)
-
-onMounted(async () => {
-  products.value = await getProducts('')
-})
+defineProps<{
+  products: Product[]
+  isLoading: boolean
+}>()
 </script>
 
 <template>
   <Transition name="fade">
-    <div
-      class="mt-10 modal-menu scroll-smooth card-border-radius absolute-position w-100 d-flex flex-col"
-    >
-      <div v-for="product in products" :key="product.id" class="w-100 row">
-        <ProductCard :product="product" />
+    <div class="mt-10 modal-menu scroll-smooth card-border-radius absolute-position w-100">
+      <div v-if="products === null || isLoading" class="d-flex-center">
+        <img src="/src/assets/icons/spinner.svg" />
+      </div>
+
+      <div v-else-if="products.length === 0">No products :(</div>
+
+      <div v-else class="w-100 d-flex flex-col card-container">
+        <div v-for="product in products" :key="product.id" class="w-100 row">
+          <ProductCard :product="product" />
+        </div>
       </div>
     </div>
   </Transition>
@@ -34,18 +37,24 @@ onMounted(async () => {
 }
 
 .modal-menu {
-  gap: 15px;
-
   overflow-y: scroll;
 
-  height: 320px;
+  height: auto;
+  max-height: 330px;
 
   background-color: white;
   padding: 15px;
+
+  scrollbar-color: #b0d9da #b0d9da;
+  scrollbar-width: thin;
+}
+
+.card-container {
+  gap: 15px;
 }
 
 .row {
-  height: 150px;
+  height: 89px;
 }
 </style>
-./ProductCard.vue
+@/types/Product

@@ -29,7 +29,7 @@ function emitBlur() {
   <div class="relative-position">
     <input
       :model-value="inputValue"
-      placeholder="Type text"
+      placeholder="Find product"
       class="input-styles card-border-radius w-100"
       @input="updateInputValue"
       @focus="emitFocus"
