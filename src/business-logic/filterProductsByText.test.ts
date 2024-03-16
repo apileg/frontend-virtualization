@@ -1,6 +1,7 @@
 import { test, expect } from 'vitest'
 import { filterProductsByText } from './filterProductsByText'
-import type { Product } from '@/types/product'
+import type { Product } from '@/types/Product'
+import type { HighlightedProduct } from '@/types/HighlightedProduct'
 
 // - Searches in title
 // - Searches in description
@@ -117,3 +118,45 @@ test(
     expect(actualProducts).toStrictEqual([product])
   }
 )
+
+test('Searches in title', () => {
+  const product: Product = {
+    ...baseProduct,
+    description: 'Foobar',
+    title: 'Super banana'
+  }
+
+  // highlightWords(text: string, textToFind: string): HighlightedStringPart[]
+
+  // text: 'Super banana', textToFind: 'banana'
+  // [{ highlighted: false, text: 'Super ' }, { highlighted: true, text: 'banana' }]
+
+  // 'It is bAnAnA'
+  // 'It is bAnAnA_test'
+  // 'Ban Ana'
+
+  const expectedProduct: HighlightedProduct[] = [
+    {
+      ...baseProduct,
+
+      description: [
+        {
+          highlighted: false,
+          text: 'Foobar'
+        }
+      ],
+
+      title: [
+        {
+          highlighted: false,
+          text: 'Super '
+        },
+
+        {
+          highlighted: true,
+          text: 'banana'
+        }
+      ]
+    }
+  ]
+})

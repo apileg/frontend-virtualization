@@ -1,4 +1,4 @@
-import type { Product } from '@/types/product'
+import type { Product } from '@/types/Product'
 
 export function filterProductsByText(products: Product[], textToFind: string): Product[] {
   const searchTextLower = textToFind.toLowerCase()
