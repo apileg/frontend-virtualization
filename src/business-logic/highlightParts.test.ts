@@ -1,6 +1,6 @@
 import type { HighlightedStringPart } from '@/types/HighlightedStringPart'
 import { test, expect } from 'vitest'
-import { highlightParts } from './highlightWords'
+import { highlightParts } from './highlightParts'
 
 test('Search for part case-insensitively', () => {
   const text = 'Super banana! BaNaNa world! Foobananabar? Ban Ana'
@@ -44,5 +44,19 @@ test('Search for part case-insensitively', () => {
   ]
 
   const actualParts = highlightParts(text, partToFind)
+  expect(actualParts).toStrictEqual(expectedParts)
+})
+
+test('Does not highlight anything when partToFind === undefined', () => {
+  const text = 'Lorem ipsum dolor sit amet'
+
+  const expectedParts: HighlightedStringPart[] = [
+    {
+      highlighted: false,
+      text: 'Lorem ipsum dolor sit amet'
+    }
+  ]
+
+  const actualParts = highlightParts(text, undefined)
   expect(actualParts).toStrictEqual(expectedParts)
 })

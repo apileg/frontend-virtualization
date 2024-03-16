@@ -1,6 +1,15 @@
 import type { HighlightedStringPart } from '@/types/HighlightedStringPart'
 
-export function highlightParts(text: string, partToFind: string): HighlightedStringPart[] {
+export function highlightParts(text: string, partToFind?: string): HighlightedStringPart[] {
+  if (partToFind === undefined) {
+    return [
+      {
+        highlighted: false,
+        text
+      }
+    ]
+  }
+
   const regex = new RegExp(partToFind, 'gi')
 
   const aroundMatches = text.split(regex)

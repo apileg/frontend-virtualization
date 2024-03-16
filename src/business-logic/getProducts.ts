@@ -1,15 +1,10 @@
 import type { Product } from '@/types/Product'
-import { filterProductsByText } from './filterProductsByText'
 import type { HighlightedProduct } from '@/types/HighlightedProduct'
+import { getHighlightedProducts } from './getHighlightedProducts'
 
 export async function getProducts(textToFind?: string): Promise<HighlightedProduct[]> {
   const products = await fetchAllProducts()
-
-  if (textToFind === undefined) {
-    return products
-  }
-
-  return filterProductsByText(products, textToFind)
+  return getHighlightedProducts(products, textToFind)
 }
 
 async function fetchAllProducts(): Promise<Product[]> {
