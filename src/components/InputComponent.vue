@@ -29,8 +29,8 @@ function emitBlur() {
   <div class="relative-position">
     <input
       :model-value="inputValue"
-      placeholder="Enter value"
-      class="input-styles card-border-radius"
+      placeholder="Type text"
+      class="input-styles card-border-radius w-100"
       @input="updateInputValue"
       @focus="emitFocus"
       @blur="emitBlur"
@@ -42,7 +42,6 @@ function emitBlur() {
 
 <style scoped>
 .input-styles {
-  width: 100%;
   height: 65px;
   padding: 1rem;
 

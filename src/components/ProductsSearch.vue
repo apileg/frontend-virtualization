@@ -25,6 +25,6 @@ function onBlur() {
 
 <style scoped>
 .product-search {
-  width: 450px;
+  width: 500px;
 }
 </style>
