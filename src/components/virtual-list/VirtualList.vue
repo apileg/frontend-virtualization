@@ -36,7 +36,7 @@ const displayedIndices = computed(() => inclusiveRange(firstRowIndex.value, last
       width: '100%',
 
       height: 'auto',
-      maxHeight: `${maxDisplayedRows * pxPerRow}px`,
+      maxHeight: `${maxDisplayedRows * pxPerRow - rowGapPx}px`,
 
       overflowY: 'scroll'
     }"
@@ -44,7 +44,7 @@ const displayedIndices = computed(() => inclusiveRange(firstRowIndex.value, last
   >
     <div
       :style="{
-        height: `${rows.length * pxPerRow}px`,
+        height: `${rows.length * pxPerRow - rowGapPx}px`,
         paddingTop: `${firstRowIndex * pxPerRow}px`
       }"
     >
@@ -53,7 +53,7 @@ const displayedIndices = computed(() => inclusiveRange(firstRowIndex.value, last
         :key="displayedIndex"
         :style="{
           height: `${rowHeightPx}px`,
-          marginBottom: `${props.rowGapPx}px`
+          marginBottom: displayedIndex === lastRowIndex ? '0' : `${props.rowGapPx}px`
         }"
       >
         <slot :row="rows[displayedIndex]"></slot>
