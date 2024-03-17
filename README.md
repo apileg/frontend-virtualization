@@ -44,32 +44,32 @@ and height of one row is `50px`
 
 In DOM, we will have these rows (indices mean indices of the items in the list):
 
-![](./docs/1.png)
+![](./images/1.png)
 
 After scrolling down by one item it will look like this:
 
-![](./docs/2.png)
+![](./images/2.png)
 
 Notice that item `5` was added. After scrolling again:
 
-![](./docs/3.png)
+![](./images/3.png)
 
 After scrolling again, we get:
 
-![](./docs/4.png)
+![](./images/4.png)
 
 Notice how `0` was deleted - we keep at most 2 overscan rows. When scrolling,
 we keep adding and removing rows like that:
 
-![](./docs/5.png)
-![](./docs/6.png)
-![](./docs/7.png)
+![](./images/5.png)
+![](./images/6.png)
+![](./images/7.png)
 
 Once we reach the end of the list (remember, we have 10 rows in total), we
 stop adding overscan rows at the bottom, and simply remove overscan rows at
 the top:
 
-![](./docs/8.png)
+![](./images/8.png)
 
 And so on
 
@@ -77,19 +77,19 @@ And so on
 
 Let's look at the this moment of scrolling:
 
-![](./docs/9.png)
+![](./images/9.png)
 
 Before the scroll, `scrollTop` of the the first `<div>` was `100px`, since
 there are 2 rows before the top edge of the displayed part of the div,
 and each row is `50px` in height:
 
-![](./docs/10.png)
+![](./images/10.png)
 
 The scrollbar would look like below. We have 10 rows in total, 50px each,
 so total content height is 500px. We have scrolled past 2 rows, so the
 scroll thumb is at 100px
 
-![](./docs/11.png)
+![](./images/11.png)
 
 After we scroll down by one row, we essentially scroll by 50px. `scrollTop`
 would become `150px`. Remember that we also delete row `0`, so now row `1`
@@ -101,18 +101,18 @@ Row `2` would start at offset `50px`, row `3` - at offset `100px`, and so on
 As a result, we would see wrong rows in the window (recall from the screenshot
 above the we should see rows 3, 4, 5, but we see 4, 5, 6 instead)
 
-![](./docs/12.png)
+![](./images/12.png)
 
 To fix that, we compensate the space that row `0` was occupying before deletion.
 We do that by adding `paddingTop` to the second `div`. It's value will be
 the height of row `0`:
 
-![](./docs/13.png)
+![](./images/13.png)
 
 When we scroll again and remove row `1`, we add another `50px` to the padding,
 so it's `100px` in total:
 
-![](./docs/14.png)
+![](./images/14.png)
 
 If the index of the first row in the DOM is `firstRowIndex`, we can compute
 `paddingTop` as
