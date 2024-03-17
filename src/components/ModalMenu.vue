@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { HighlightedProduct } from '@/types/HighlightedProduct'
 import ProductCard from './ProductCard.vue'
+import Spinner from './Spinner.vue'
 import VirtualList from './virtual-list/VirtualList.vue'
 
 defineProps<{
@@ -13,7 +14,7 @@ defineProps<{
   <Transition name="fade">
     <div class="mt-10 modal-menu card-border-radius absolute-position w-100">
       <div v-if="isLoading" class="d-flex-center">
-        <img src="/src/assets/icons/spinner.svg" />
+        <Spinner />
       </div>
 
       <div v-else-if="highlightedProducts.length === 0">No products :(</div>
@@ -22,12 +23,12 @@ defineProps<{
         v-else
         :rows="highlightedProducts"
         :rowHeightPx="89"
-        :maxDisplayedRowsCount="4"
-        :overscanRows="50"
+        :maxDisplayedRows="5"
+        :overscanRows="2"
       >
         <template v-slot="{ row }">
           <div class="w-100 row">
-            <ProductCard :highlighted-product="row" />
+            <ProductCard :highlightedProduct="row" />
           </div>
         </template>
       </VirtualList>
@@ -46,8 +47,6 @@ defineProps<{
 }
 
 .modal-menu {
-  /* overflow-y: scroll; */
-
   background-color: white;
   padding: 15px;
 

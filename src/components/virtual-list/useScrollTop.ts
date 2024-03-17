@@ -1,6 +1,6 @@
 import { ref, type Ref } from 'vue'
 
-export interface UseScrollTopResolt {
+export interface UseScrollTopResult {
   scrollTop: Ref<number>
   onScroll: (event: UIEvent) => void
 }
@@ -11,8 +11,6 @@ export function useScrollTop() {
   function onScroll(event: UIEvent) {
     const container = assertCurrentTargetIsHtmlElement(event)
     scrollTop.value = container.scrollTop
-
-    console.log('Hi')
   }
 
   function assertCurrentTargetIsHtmlElement(event: UIEvent): HTMLElement {

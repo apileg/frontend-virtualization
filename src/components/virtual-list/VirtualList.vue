@@ -5,14 +5,14 @@ import { inclusiveRange } from './inclusiveRange'
 
 const props = defineProps<{
   rows: TRow[]
-  maxDisplayedRowsCount: number
+  maxDisplayedRows: number
   rowHeightPx: number
   overscanRows: number
 }>()
 
 const { scrollTop, onScroll } = useScrollTop()
 
-const displayedRows = computed(() => Math.min(props.rows.length, props.maxDisplayedRowsCount))
+const displayedRows = computed(() => Math.min(props.rows.length, props.maxDisplayedRows))
 const renderedRows = computed(() => displayedRows.value + 2 * props.overscanRows)
 
 const topmostSeenRow = computed(() => Math.floor(scrollTop.value / props.rowHeightPx))
@@ -38,16 +38,15 @@ const renderedIndices = computed(() => inclusiveRange(firstRow.value, lastRow.va
   >
     <div
       :style="{
-        height: `${rows.length * rowHeightPx}px`
+        height: `${rows.length * rowHeightPx}px`,
+        marginTop: `${topmostSeenRow * rowHeightPx}px`
       }"
     >
       <div
-        v-for="(displayedIndex, originalIndex) in renderedIndices"
+        v-for="displayedIndex in renderedIndices"
         :key="displayedIndex"
         :style="{
-          height: `${props.rowHeightPx}px`,
-          position: 'relative',
-          top: `${(displayedIndex - originalIndex) * props.rowHeightPx}px`
+          height: `${props.rowHeightPx}px`
         }"
       >
         <slot :row="rows[displayedIndex]"></slot>
