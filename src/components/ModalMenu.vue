@@ -24,7 +24,7 @@ defineProps<{
         :rows="highlightedProducts"
         :rowHeightPx="89"
         :maxDisplayedRows="5"
-        :rowGapPx="0"
+        :rowGapPx="15"
         :overscanRows="2"
       >
         <template v-slot="{ row }">
