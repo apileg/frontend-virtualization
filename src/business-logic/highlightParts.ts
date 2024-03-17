@@ -1,7 +1,7 @@
 import type { HighlightedStringPart } from '@/types/HighlightedStringPart'
 
-export function highlightParts(text: string, partToFind?: string): HighlightedStringPart[] {
-  if (partToFind === undefined) {
+export function highlightParts(text: string, partToFind: string): HighlightedStringPart[] {
+  if (partToFind === '') {
     return [
       {
         highlighted: false,

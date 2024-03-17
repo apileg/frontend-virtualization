@@ -1,8 +1,29 @@
-- [] Loader
-- [] Design for card like in Notion
-- [] Virtualization
-- [] Filtering
+# Bugs
+
+- [] Fix bug: when you click on the menu to select a text, the menu
+- [] Scroll bar background and track color
+
+# Critical
+
+- [] Integrate virtualization
+  - [] Fix: keep topmost div in the DOM and shift it behind using negative position
+- [] Add prop `rowsGapPx` to `VirtualList`
+
+- [] Remove REMOVEME
+
+# Less important
+
 - [] Handle network errors
-- [] Highlight found text parts
+- [] Cache images in rows of the `VirtualList`
+
+# Features
+
 - [] Find suggestion (?)
 - [] Find by category (?)
+
+# Done
+
+- [x] Loader
+- [x] Filtering
+- [x] Highlight found text parts
+- [x] Design for card like in Notion

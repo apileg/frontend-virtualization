@@ -2,17 +2,17 @@
 import { onMounted, ref, watch } from 'vue'
 import InputComponent from './InputComponent.vue'
 import ModalMenu from './ModalMenu.vue'
-import type { Product } from '@/types/Product'
+import type { HighlightedProduct } from '@/types/HighlightedProduct'
 import { getProducts } from '@/business-logic/getProducts'
 import { useDebounced } from '@/hooks/useDebounced'
 
 onMounted(async () => {
   isProductsLoading.value = true
-  products.value = await getProducts()
+  highlightedProduct.value = await getProducts('')
   isProductsLoading.value = false
 })
 
-const products = ref<Product[]>([])
+const highlightedProduct = ref<HighlightedProduct[]>([])
 const isProductsLoading = ref(true)
 
 const inputValue = ref('')
@@ -24,7 +24,7 @@ watch(
 
   async (textToFind) => {
     isProductsLoading.value = true
-    products.value = await getProducts(textToFind)
+    highlightedProduct.value = await getProducts(textToFind)
     isProductsLoading.value = false
   }
 )
@@ -34,14 +34,18 @@ function onFocus() {
 }
 
 function onBlur() {
-  isMenuShown.value = false
+  // isMenuShown.value = false
 }
 </script>
 
 <template>
   <div class="product-search">
     <InputComponent v-model:input-value="inputValue" @on-focus="onFocus" @on-blur="onBlur">
-      <ModalMenu v-show="isMenuShown" :products="products" :is-loading="isProductsLoading" />
+      <ModalMenu
+        v-show="isMenuShown"
+        :highlighted-products="highlightedProduct"
+        :is-loading="isProductsLoading"
+      />
     </InputComponent>
   </div>
 </template>
@@ -51,4 +55,3 @@ function onBlur() {
   width: 500px;
 }
 </style>
-@/types/Product

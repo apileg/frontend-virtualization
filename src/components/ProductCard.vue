@@ -1,43 +1,45 @@
 <script setup lang="ts">
-import type { Product } from '@/types/Product'
+import type { HighlightedProduct } from '@/types/HighlightedProduct'
+import HighlightedString from './HighlightedString.vue'
 
 defineProps<{
-  product: Product
+  highlightedProduct: HighlightedProduct
 }>()
 </script>
 
 <template>
   <div class="card w-100 d-flex">
-    <img :src="product.thumbnail" :alt="product.title" class="card-image object-cover" />
+    <img :src="highlightedProduct.thumbnail" class="card-image object-cover" />
 
     <div class="card-content d-flex flex-col w-100">
-      <!-- <h4>
-        <HighlightedString :value="product.title" />
-      </h4> -->
+      <h4 class="font-weight-bold text-truncate">
+        <HighlightedString :parts="highlightedProduct.title" />
+      </h4>
 
-      <h4 class="font-weight-bold text-truncate">{{ product.title }}</h4>
       <p class="text-charcoal text-truncate">
-        {{ product.description }}
+        <HighlightedString :parts="highlightedProduct.description" />
       </p>
 
       <div class="badges">
         <p class="discount font-weight-bold text-negative">
-          Discount {{ product.discountPercentage }} %
+          Discount {{ highlightedProduct.discountPercentage }} %
         </p>
 
-        <p class="brand font-weight-bold text-aqua-blue text-truncate">{{ product.brand }}</p>
+        <p class="brand font-weight-bold text-aqua-blue text-truncate">
+          {{ highlightedProduct.brand }}
+        </p>
 
         <div class="price-and-rating">
-          <h4 class="price font-weight-bold text-aqua-blue">$ {{ product.price }}</h4>
+          <h4 class="price font-weight-bold text-aqua-blue">$ {{ highlightedProduct.price }}</h4>
           <div class="d-flex-center items-center">
             <img src="/src/assets/icons/star.svg" class="star-icon" />
-            <h4 class="rating font-weight-bold text-aqua-blue">{{ product.rating }}</h4>
+            <h4 class="rating font-weight-bold text-aqua-blue">{{ highlightedProduct.rating }}</h4>
           </div>
         </div>
 
         <div class="category d-flex-center items-center bg-phthalo-green card-border-radius">
           <p class="text-spanish-green">
-            {{ product.category }}
+            {{ highlightedProduct.category }}
           </p>
         </div>
       </div>

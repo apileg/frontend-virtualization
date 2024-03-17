@@ -47,7 +47,7 @@ test('Search for part case-insensitively', () => {
   expect(actualParts).toStrictEqual(expectedParts)
 })
 
-test('Does not highlight anything when partToFind === undefined', () => {
+test('Does not highlight anything when partToFind is an empty string', () => {
   const text = 'Lorem ipsum dolor sit amet'
 
   const expectedParts: HighlightedStringPart[] = [
@@ -57,6 +57,6 @@ test('Does not highlight anything when partToFind === undefined', () => {
     }
   ]
 
-  const actualParts = highlightParts(text, undefined)
+  const actualParts = highlightParts(text, '')
   expect(actualParts).toStrictEqual(expectedParts)
 })

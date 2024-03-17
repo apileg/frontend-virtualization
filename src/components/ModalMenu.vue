@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { Product } from '@/types/Product'
+import type { HighlightedProduct } from '@/types/HighlightedProduct'
 import ProductCard from './ProductCard.vue'
 
 defineProps<{
-  products: Product[]
+  highlightedProducts: HighlightedProduct[]
   isLoading: boolean
 }>()
 </script>
@@ -11,15 +11,15 @@ defineProps<{
 <template>
   <Transition name="fade">
     <div class="mt-10 modal-menu scroll-smooth card-border-radius absolute-position w-100">
-      <div v-if="products === null || isLoading" class="d-flex-center">
+      <div v-if="highlightedProducts === null || isLoading" class="d-flex-center">
         <img src="/src/assets/icons/spinner.svg" />
       </div>
 
-      <div v-else-if="products.length === 0">No products :(</div>
+      <div v-else-if="highlightedProducts.length === 0">No products :(</div>
 
       <div v-else class="w-100 d-flex flex-col card-container">
-        <div v-for="product in products" :key="product.id" class="w-100 row">
-          <ProductCard :product="product" />
+        <div v-for="product in highlightedProducts" :key="product.id" class="w-100 row">
+          <ProductCard :highlighted-product="product" />
         </div>
       </div>
     </div>
