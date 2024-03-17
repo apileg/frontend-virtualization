@@ -4,7 +4,7 @@ import ProductsSearch from './components/ProductsSearch.vue'
 
 <template>
   <main>
-    <div class="d-flex-center items-center h-100">
+    <div class="d-flex-center items-start mt-40 h-100">
       <ProductsSearch />
     </div>
   </main>
