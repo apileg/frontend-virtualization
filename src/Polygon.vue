@@ -7,7 +7,13 @@ const items = Array(1000)
   .map((_, i) => i)
 </script>
 <template>
-  <VirtualList :rows="items" :rowHeightPx="50" :maxDisplayedRows="3" :overscanRows="2">
+  <VirtualList
+    :rows="items"
+    :rowHeightPx="50"
+    :maxDisplayedRows="3"
+    :overscanRows="2"
+    :rowGapPx="50"
+  >
     <template v-slot="{ row }">
       <div
         style="

@@ -5,48 +5,55 @@ import { inclusiveRange } from './inclusiveRange'
 
 const props = defineProps<{
   rows: TRow[]
-  maxDisplayedRows: number
+
   rowHeightPx: number
+  rowGapPx: number
+
+  maxDisplayedRows: number
   overscanRows: number
 }>()
 
+const pxPerRow = computed(() => props.rowHeightPx + props.rowGapPx)
+
 const { scrollTop, onScroll } = useScrollTop()
+const topmostSeenRowIndex = computed(() => Math.floor(scrollTop.value / pxPerRow.value))
 
-const displayedRows = computed(() => Math.min(props.rows.length, props.maxDisplayedRows))
-const renderedRows = computed(() => displayedRows.value + 2 * props.overscanRows)
+const firstRowIndex = computed(() => Math.max(0, topmostSeenRowIndex.value - props.overscanRows))
 
-const topmostSeenRow = computed(() => Math.floor(scrollTop.value / props.rowHeightPx))
-
-const firstRow = computed(() => Math.max(0, topmostSeenRow.value - props.overscanRows))
-
-const lastRow = computed(() =>
-  Math.min(props.rows.length - 1, firstRow.value + (renderedRows.value - 1))
+const lastRowIndex = computed(() =>
+  Math.min(
+    props.rows.length - 1,
+    topmostSeenRowIndex.value + (props.maxDisplayedRows + props.overscanRows - 1)
+  )
 )
 
-const renderedIndices = computed(() => inclusiveRange(firstRow.value, lastRow.value))
+const displayedIndices = computed(() => inclusiveRange(firstRowIndex.value, lastRowIndex.value))
 </script>
 
 <template>
   <div
     :style="{
       width: '100%',
-      height: `${displayedRows * rowHeightPx}px`,
-      overflowY: 'scroll',
-      overscrollBehavior: 'none'
+
+      height: 'auto',
+      maxHeight: `${maxDisplayedRows * pxPerRow}px`,
+
+      overflowY: 'scroll'
     }"
     @scroll="onScroll"
   >
     <div
       :style="{
-        height: `${rows.length * rowHeightPx}px`,
-        marginTop: `${topmostSeenRow * rowHeightPx}px`
+        height: `${rows.length * pxPerRow}px`,
+        paddingTop: `${firstRowIndex * pxPerRow}px`
       }"
     >
       <div
-        v-for="displayedIndex in renderedIndices"
+        v-for="displayedIndex in displayedIndices"
         :key="displayedIndex"
         :style="{
-          height: `${props.rowHeightPx}px`
+          height: `${rowHeightPx}px`,
+          marginBottom: `${props.rowGapPx}px`
         }"
       >
         <slot :row="rows[displayedIndex]"></slot>
