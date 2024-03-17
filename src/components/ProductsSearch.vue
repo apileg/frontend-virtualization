@@ -33,14 +33,18 @@ function onFocus() {
   isMenuShown.value = true
 }
 
-function onBlur() {
-  // isMenuShown.value = false
+function onClickOutside() {
+  isMenuShown.value = false
 }
 </script>
 
 <template>
   <div class="product-search">
-    <InputComponent v-model:input-value="inputValue" @on-focus="onFocus" @on-blur="onBlur">
+    <InputComponent
+      v-model:input-value="inputValue"
+      v-click-outside="onClickOutside"
+      @on-focus="onFocus"
+    >
       <ModalMenu
         v-show="isMenuShown"
         :highlighted-products="highlightedProduct"
