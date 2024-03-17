@@ -7,9 +7,7 @@ import { getProducts } from '@/business-logic/getProducts'
 import { useDebounced } from '@/hooks/useDebounced'
 
 onMounted(async () => {
-  isProductsLoading.value = true
-  highlightedProduct.value = await getProducts('')
-  isProductsLoading.value = false
+  await updateProducts('')
 })
 
 const highlightedProduct = ref<HighlightedProduct[]>([])
@@ -23,11 +21,15 @@ watch(
   () => debouncedInput.value,
 
   async (textToFind) => {
-    isProductsLoading.value = true
-    highlightedProduct.value = await getProducts(textToFind)
-    isProductsLoading.value = false
+    await updateProducts(textToFind)
   }
 )
+
+async function updateProducts(textToFind: string) {
+  isProductsLoading.value = true
+  highlightedProduct.value = await getProducts(textToFind)
+  isProductsLoading.value = false
+}
 
 function onFocus() {
   isMenuShown.value = true
