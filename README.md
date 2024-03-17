@@ -1,3 +1,12 @@
+# Contents
+
+- [Contents](#contents)
+- [Structure](#structure)
+- [Rows](#rows)
+- [Deletion and padding](#deletion-and-padding)
+- [Gaps between rows](#gaps-between-rows)
+- [Implementation](#implementation)
+
 # Structure
 
 First, we have a fixed-size `<div>` that displays `maxDisplayedRows` rows at a time and
