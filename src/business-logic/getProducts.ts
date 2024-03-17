@@ -4,7 +4,11 @@ import { getFilteredHighlightedProducts } from './getFilteredHighlightedProducts
 
 export async function getProducts(textToFind: string): Promise<HighlightedProduct[]> {
   const products = await fetchAllProducts()
-  return getFilteredHighlightedProducts(products, textToFind)
+
+  // REMOVEME
+  const manyProducts = products.flatMap((_) => products)
+
+  return getFilteredHighlightedProducts(manyProducts, textToFind)
 }
 
 async function fetchAllProducts(): Promise<Product[]> {

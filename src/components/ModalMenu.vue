@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { HighlightedProduct } from '@/types/HighlightedProduct'
 import ProductCard from './ProductCard.vue'
+import VirtualList from './virtual-list/VirtualList.vue'
 
 defineProps<{
   highlightedProducts: HighlightedProduct[]
@@ -10,18 +11,26 @@ defineProps<{
 
 <template>
   <Transition name="fade">
-    <div class="mt-10 modal-menu scroll-smooth card-border-radius absolute-position w-100">
-      <div v-if="highlightedProducts === null || isLoading" class="d-flex-center">
+    <div class="mt-10 modal-menu card-border-radius absolute-position w-100">
+      <div v-if="isLoading" class="d-flex-center">
         <img src="/src/assets/icons/spinner.svg" />
       </div>
 
       <div v-else-if="highlightedProducts.length === 0">No products :(</div>
 
-      <div v-else class="w-100 d-flex flex-col card-container">
-        <div v-for="product in highlightedProducts" :key="product.id" class="w-100 row">
-          <ProductCard :highlighted-product="product" />
-        </div>
-      </div>
+      <VirtualList
+        v-else
+        :rows="highlightedProducts"
+        :rowHeightPx="89"
+        :maxDisplayedRowsCount="4"
+        :overscanRows="50"
+      >
+        <template v-slot="{ row }">
+          <div class="w-100 row">
+            <ProductCard :highlighted-product="row" />
+          </div>
+        </template>
+      </VirtualList>
     </div>
   </Transition>
 </template>
@@ -37,24 +46,12 @@ defineProps<{
 }
 
 .modal-menu {
-  overflow-y: scroll;
-
-  height: auto;
-  max-height: 330px;
+  /* overflow-y: scroll; */
 
   background-color: white;
   padding: 15px;
 
-  scrollbar-color: #b0d9da #b0d9da;
-  scrollbar-width: thin;
-}
-
-.card-container {
-  gap: 15px;
-}
-
-.row {
-  height: 89px;
+  scrollbar-color: #b0d9da transparent;
+  scrollbar-width: 15px;
 }
 </style>
-@/types/Product

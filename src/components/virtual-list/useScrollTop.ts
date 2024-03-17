@@ -11,6 +11,8 @@ export function useScrollTop() {
   function onScroll(event: UIEvent) {
     const container = assertCurrentTargetIsHtmlElement(event)
     scrollTop.value = container.scrollTop
+
+    console.log('Hi')
   }
 
   function assertCurrentTargetIsHtmlElement(event: UIEvent): HTMLElement {
