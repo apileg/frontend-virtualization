@@ -29,6 +29,7 @@ function emitBlur() {
   <div class="relative-position">
     <input
       :model-value="inputValue"
+      type="search"
       placeholder="Find product"
       class="input-styles card-border-radius w-100"
       @input="updateInputValue"
@@ -46,5 +47,27 @@ function emitBlur() {
   padding: 1rem;
 
   font-size: 2rem;
+}
+
+.input-styles::-webkit-search-cancel-button {
+  cursor: pointer;
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  border-radius: 50em;
+  background: url('/src/assets/icons/times-circle.svg')
+    no-repeat 50% 50%;
+  background-size: contain;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.input-styles:focus::-webkit-search-cancel-button {
+  opacity: 0.3;
+  pointer-events: all;
+}
+
+.input-styles.dark::-webkit-search-cancel-button {
+  filter: invert(1);
 }
 </style>
