@@ -1,24 +1,24 @@
 # Critical
 
-- [] Integrate virtualization
-- [] Fix: keep topmost div in the DOM and shift it behind using negative position
-- [] Add prop `rowsGapPx` to `VirtualList`
+- [x] Integrate virtualization
+- [x] Fix: keep topmost div in the DOM and shift it behind using negative position
+- [x] Add prop `rowsGapPx` to `VirtualList`
 
-- [] Remove REMOVEME
+- [x] Remove REMOVEME
 - [x] Fix bug: when you click on the menu to select a text, the menu
 - [x] Scroll bar background and track color
 - [] Host app using Vercel or Netlify
 
 # Less importan
 
-- [] Cache images in rows of the `VirtualList`
+- [-] Cache images in rows of the `VirtualList`
 - [x] Handle network errors
 - [x] Add cross for clearing input
 
 # Features
 
-- [] Find suggestion (?)
-- [] Find by category (?)
+- [-] Find suggestion (?)
+- [-] Find by category (?)
 
 # Done
 
